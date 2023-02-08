@@ -1,13 +1,34 @@
-# pv-api
 # PV API Documentation
+<!--ts-->
+   * [Authentication](#authentication)
+   * [User](#user)
+      * [POST /register](#post-register)
+      * [POST /login](#post-login)
+      * [GET /refresh](#get-refresh)
+      * [DELETE /logout](#delete-logout)
+      * [PUT /:id/change-password](#put-idchange-password)
+      * [GET /user/:id](#get-userid)
+      * [PUT /user/:id](#put-userid)
+      * [DELETE /user/:id](#delete-userid)
+      * [GET /](#get-)
+   * [Plant](#plant)
+     * [GET /](#get--1)
+     * [POST /](#post-)
+     * [GET /:id](#get-id)
+     * [PUT /:id](#put-id)
+     * [DELETE /:id](#delete-id)
+<!--te-->
 
 
-## Authentication
+Authentication
+============
+
 | Header        | Content |
 | ------------- | ------- |
 | authorization | token   |
 
-## User
+User
+============
 
 
 ### POST /register
@@ -253,7 +274,8 @@ Cookies otomatis terhapus
 ---
 
 
-## Plant
+Plant
+============
 
 ### GET /
 
