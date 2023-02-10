@@ -27,7 +27,7 @@ Authentication
 
 | Header        | Content |
 | ------------- | ------- |
-| authorization | token   |
+| authorization | accessToken   |
 
 User
 ============
