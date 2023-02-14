@@ -16,7 +16,8 @@ const Users = mongoose.Schema({
     },
     saldo_user: {
         type: Number,
-        require: true
+        require: true,
+        default: 0
     },
     pengeluaran_user: {
         type: Number,
