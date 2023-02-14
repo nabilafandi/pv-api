@@ -19,6 +19,8 @@
      * [GET /:id](#get-id)
      * [PUT /:id](#put-id)
      * [DELETE /:id](#delete-id)
+   * [Payment](#payment)
+     * [POST /](#post--1)
 <!--te-->
 
 
@@ -443,3 +445,27 @@ Plant
 
 
 ---
+
+
+Payment
+============
+
+### POST /
+
+| End Point | Method | Body |
+| --------- | ------ | ---- |
+| /payment    | post    | https://snap-docs.midtrans.com/#request-body-json-parameter |
+#### Response
+```json
+{
+    "message": "Transaction created succesfully",
+    "transaction": {
+        "token": "be3c4810-716b-41f5-aadb-b1a27bbf1425",
+        "redirect_url": "https://app.sandbox.midtrans.com/snap/v3/redirection/be3c4810-716b-41f5-aadb-b1a27bbf1425"
+    }
+}
+```
+
+
+---
+
