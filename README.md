@@ -3,11 +3,12 @@
 
 <!--ts-->
    * [Authentication](#authentication)
-   * [User](#user)
+   * [Auth](#auth)
       * [POST /register](#post-register)
       * [POST /login](#post-login)
       * [GET /refresh](#get-refresh)
       * [DELETE /logout](#delete-logout)
+   * [User](#user)
       * [PUT /:id/change-password](#put-idchange-password)
       * [GET /user/:id](#get-userid)
       * [PUT /user/:id](#put-userid)
@@ -31,7 +32,7 @@ Authentication
 | ------------- | ------- |
 | authorization | accessToken   |
 
-User
+Auth
 ============
 
 
@@ -39,7 +40,7 @@ User
 
 | End Point | Method | Body  |
 |-|-|-|
-| /user/register | post | username*,  password*,  alamat_user,  no\_hp\_user,  saldo_user,  pengeluaran_user,  total\_pengeluaran\_user,  estimasi\_pengeluaran\_harian,  estimasi\_pengeluaran\_bulanan,  estimasi\_pengeluaran\_tahunan,  total\_penghematan\_harian,  total\_penghematan\_bulanan,  total\_penghematan\_tahunan,  |
+| /auth/register | post | username*,  password*,  alamat_user,  no\_hp\_user,  saldo_user,  pengeluaran_user,  total\_pengeluaran\_user,  estimasi\_pengeluaran\_harian,  estimasi\_pengeluaran\_bulanan,  estimasi\_pengeluaran\_tahunan,  total\_penghematan\_harian,  total\_penghematan\_bulanan,  total\_penghematan\_tahunan,  |
 #### Response:
 
 ```json
@@ -72,7 +73,7 @@ User
 
 | End Point | Method | Body  |
 |-|-|-|
-| /user/login | post | username*,  password*  |
+| /auth/login | post | username*,  password*  |
 
 #### Response:
 ```json
@@ -90,7 +91,7 @@ User
 ### GET /refresh
 | End Point | Method | Body  |
 |-|-|-|
-| /user/refresh | get | set cookies, jwt=token|
+| /auth/refresh | get | set cookies, jwt=token|
 #### Response:
 ```json
 {
@@ -104,7 +105,7 @@ User
 ### DELETE /logout
 | End Point | Method | Body  |
 |-|-|-|
-| /user/logout | delete | set cookies,  jwt=token  |
+| /auth/logout | delete | set cookies,  jwt=token  |
 #### Response:
 ```json
 {
@@ -118,6 +119,9 @@ Cookies otomatis terhapus
 
 
 ---
+
+User
+============
 
 ### PUT /:id/change-password
 | End Point | Method | Body  |
