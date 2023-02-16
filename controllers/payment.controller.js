@@ -23,7 +23,6 @@ const transactionStatus = async (req, res) => {
         await apiClient.transaction.status(req.params.id)
             .then((response) => {
                 res.status(response.status_code).json({message: response })
-                // console.log(response.status_code)
             })
             .catch((error) => {
                 const apiResponse = error.ApiResponse
