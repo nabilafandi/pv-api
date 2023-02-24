@@ -1,4 +1,5 @@
 const services = require('../../services/services')
+const { excludePassword } = require('../../services/user.service')
 
 
 const updateUser = async (req, res) => {
@@ -14,6 +15,7 @@ const updateUser = async (req, res) => {
 
         else {
             const newUser = data
+            await services.user.updateUser(req.params.id, newUser)
             const updatedUser = await services.user.updateUser(req.params.id, newUser)
             res.json({ message: "User updated succesfully.", updatedUser })
         }

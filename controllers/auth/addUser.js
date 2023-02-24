@@ -1,4 +1,5 @@
 const services = require('../../services/services')
+const { excludePassword } = require('../../services/user.service')
 
 //add new user
 const addUser = async (req, res) => {
@@ -15,7 +16,8 @@ const addUser = async (req, res) => {
         data.password = hashedPwd
         //membuat user
         const newUser = await services.user.createNewUser(data)
-        res.status(200).json({ message: "User created succesfully", newUser })
+        const createdUser = await excludePassword(newUser._id)
+        res.status(200).json({ message: "User created succesfully", createdUser })
     } catch (error) {
         res.status(500).json({ message: "Error creating user.", error: error })
     }

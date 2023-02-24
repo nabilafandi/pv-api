@@ -13,12 +13,16 @@ async function createNewUser(data) {
 }
 
 async function findUsername(username) {
-    const foundUsername = await User.find({ username: username })
-    return foundUsername[0]
+    const foundUsername = await User.findOne({username: username})
+    return foundUsername
 }
 
+async function excludePassword(id) {
+    const excludePassword = await User.findOne({_id: id},{__v:0, password:0})
+    return excludePassword
+}
 async function findAllusers() {
-    const users = await User.find({})
+    const users = await User.find({},{__v:0,password:0})
     return users
 }
 async function findUserbyId(id) {
@@ -27,7 +31,7 @@ async function findUserbyId(id) {
 }
 
 async function updateUser(id, data) {
-    const updatedUser = await User.findByIdAndUpdate(id, data, { new: true })
+    const updatedUser = await User.findByIdAndUpdate(id, data, {new: true})
     return updatedUser
 }
 
@@ -37,7 +41,7 @@ async function deletebyId(id) {
 }
 
 async function updatePassword(id, data) {
-    const updatedPassword = await User.findByIdAndUpdate(id, data, { new: true })
+    const updatedPassword = await User.findByIdAndUpdate(id, {password: data}, { new: true })
     return updatedPassword
 }
 //token
@@ -54,6 +58,7 @@ module.exports = {
     findUsername,
     updateToken,
     findbyToken,
+    excludePassword,
     findAllusers,
     findUserbyId,
     updateUser,

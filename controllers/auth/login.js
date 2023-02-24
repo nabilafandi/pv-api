@@ -1,4 +1,5 @@
 const services = require('../../services/services')
+const { excludePassword } = require('../../services/user.service')
 
 //login
 const login = async (req, res) => {
@@ -19,11 +20,12 @@ const login = async (req, res) => {
       else {
         //jwt
         const username = foundUsername.username
+        userlogin = await excludePassword(foundUsername._id)
         const accessToken = await services.token.createAccessToken(username)
         const refreshToken = await services.token.createRefreshToken(username)
         await services.user.updateToken(foundUsername._id, refreshToken)
         res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: false, maxAge: 24 * 60 * 60 * 1000 })
-        return res.json({ accessToken })
+        return res.json({ accessToken, userlogin})
       }
   
     } catch (error) {
