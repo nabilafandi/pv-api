@@ -28,6 +28,8 @@ const changePassword = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: 'Current password is incorrect' });
     }
+    if (req.body.newPassword !== req.body.repeatPassword)
+    return res.status(400).json({message: 'Passwords dont match'})
 
     // Hash the new password
     const hashedPassword = await services.hash.hashPwd(newPassword);

@@ -19,10 +19,10 @@ const login = async (req, res) => {
       //login sukses
       else {
         //jwt
-        const username = foundUsername.username
+        const userid = foundUsername._id
         userlogin = await excludePassword(foundUsername._id)
-        const accessToken = await services.token.createAccessToken(username)
-        const refreshToken = await services.token.createRefreshToken(username)
+        const accessToken = await services.token.createAccessToken(userid)
+        const refreshToken = await services.token.createRefreshToken(userid)
         await services.user.updateToken(foundUsername._id, refreshToken)
         res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: false, maxAge: 24 * 60 * 60 * 1000 })
         return res.json({ accessToken, userlogin})

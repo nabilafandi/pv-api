@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 const authConfig = require('../config/auth.config');
 const Token = require('../models/tokens');
 
-async function createAccessToken(username) {
-    const data = { username };
+async function createAccessToken(userid) {
+    const data = { userid };
     const token = jwt.sign(
         { data: data },
         process.env.ACCESS_TOKEN_SECRET,
@@ -12,8 +12,8 @@ async function createAccessToken(username) {
     return token;
 }
 
-async function createRefreshToken(username) {
-    const data = { username };
+async function createRefreshToken(userid) {
+    const data = { userid };
     const token = jwt.sign(
         { data: data },
         process.env.REFRESH_TOKEN_SECRET,

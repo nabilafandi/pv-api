@@ -10,8 +10,8 @@ const refresh = async (req, res) => {
         if (!foundUser) return res.status(403).json({message: "Wrong refresh token"});
         try {
           const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
-            if (foundUser.username !== decoded.data.username)  return res.sendStatus(400)
-            const accessToken = await services.token.createAccessToken(decoded.username)
+            if (foundUser._id === decoded.data.userid)  return res.status(400).json({founduser: foundUser._id, decoduser: decoded.userid})
+            const accessToken = await services.token.createAccessToken(decoded.data.userid)
             res.json({accessToken})
           } catch (error) {
             res.status(403).json({error})
