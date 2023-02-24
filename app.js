@@ -20,7 +20,7 @@ app.use('/', Link)
 
 //configure mongoose
 mongoose.set('strictQuery', false);
-mongoose.connect(`mongodb://${dbconfig.HOST}:${dbconfig.PORT}/${dbconfig.DB}`,
+mongoose.connect(`mongodb://${dbconfig.user}:${dbconfig.password}@${dbconfig.HOST}:${dbconfig.PORT}/${dbconfig.DB}`,
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,

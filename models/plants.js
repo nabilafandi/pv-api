@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 const Plants = mongoose.Schema({
-    plant_name: {
+    nama: {
         type: String,
     },
-    alamat_lokasi_plant: {
+    alamat: {
         type: String,
     },
-    latitude_plant: {
+    latitude: {
         type: Number,
     },
-    longitude_plant: {
+    longitude: {
         type: Number,
     },
     pv_capacity: {
@@ -18,21 +18,21 @@ const Plants = mongoose.Schema({
     tanggal_instalasi: {
         type: Date,
     },
-    suhu_plant: {
-        type: Number,
-    },
-    today_kwh_load: {
-        type: Number,
-    },
-    month_kwh_load: {
-        type: Number,
-    }, 
-    total_kwh_load: {
-        type: Number,
-    },
-    fund_revenue: {
-        type: Number,
-    },
+    // suhu_plant: {
+    //     type: Number,
+    // },
+    // today_kwh_load: {
+    //     type: Number,
+    // },
+    // month_kwh_load: {
+    //     type: Number,
+    // }, 
+    // total_kwh_load: {
+    //     type: Number,
+    // },
+    // fund_revenue: {
+    //     type: Number,
+    // },
 })
 const Plant = mongoose.model("plant", Plants);
 module.exports = Plant
