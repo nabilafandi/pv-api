@@ -8,8 +8,10 @@ const login = async (req, res) => {
     //validation
     const { error } = services.validation.login.validate(data)
     if (error) { return res.status(400).json({ message: error.details[0].message }) }
-    //cek req body username 
-
+    //cek req body username kosong
+    if (!req.body.username) {
+      return res.status(400).json({ message: "username is empty"})
+    }
     //cek username ada di database
     const foundUsername = await services.user.findUsername(data.username)
     if (!foundUsername) {

@@ -3,13 +3,13 @@ const joi = require('joi')
 //auth
 const login = joi.object({
   username: joi.string().required(),
-  password: joi.string().required()
+  password: joi.string().min(6).required()
 })
 
 //user
 const addUser = joi.object({
   username: joi.string().required(),
-  password: joi.string().required(),
+  password: joi.string().min(6).required(),
   alamat: joi.string(),
   no_hp: joi.string(),
   saldo: joi.number(),
@@ -24,8 +24,8 @@ const updateUser = joi.object({
 
 const changePassword = joi.object({
   username: joi.string().required(),
-  currentPassword: joi.string().required(),
-  newPassword: joi.string().required(),
+  currentPassword: joi.string().min(6).required(),
+  newPassword: joi.string().min(6).required(),
 })
 //plant
 const addPlant = joi.object({

@@ -8,6 +8,10 @@ const addUser = async (req, res) => {
         //validasi
         const { error } = services.validation.addUser.validate(data)
         if (error) { return res.status(400).json({ message: error.details[0].message }) }
+        //cek req body username kosong
+        if (!req.body.username) {
+            return res.status(400).json({ message: "username is empty" })
+        }
         //cek username
         const foundUsername = await services.user.findUsername(data.username)
         if (foundUsername) return res.status(400).json({ message: "Username already exists" })
