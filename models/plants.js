@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 const Plants = mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user"
+    },
     nama: {
         type: String,
     },
@@ -14,25 +18,13 @@ const Plants = mongoose.Schema({
     },
     pv_capacity: {
         type: Number,
-    }, 
+    },
     tanggal_instalasi: {
         type: Date,
     },
-    // suhu_plant: {
-    //     type: Number,
-    // },
-    // today_kwh_load: {
-    //     type: Number,
-    // },
-    // month_kwh_load: {
-    //     type: Number,
-    // }, 
-    // total_kwh_load: {
-    //     type: Number,
-    // },
-    // fund_revenue: {
-    //     type: Number,
-    // },
+    pv_unit: {
+        type: String,
+    }
 })
 const Plant = mongoose.model("plant", Plants);
 module.exports = Plant

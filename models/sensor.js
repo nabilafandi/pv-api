@@ -1,5 +1,9 @@
 const mongoose = require('mongoose')
 const Sensors = mongoose.Schema({
+    plant: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "plant"
+    },
     AC1: {
         type: Object({
             E: {
@@ -46,6 +50,9 @@ const Sensors = mongoose.Schema({
     },
     DC: {
         type: Object({
+            E: {
+                type: Number
+            },
             V: {
                 type: Number
             },
