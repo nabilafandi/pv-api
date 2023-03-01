@@ -9,7 +9,7 @@ const addPlant = async (req, res) => {
         const newPlant = await services.plant.createNewPlant(data)
         res.status(200).json({ message: "Plant created succesfully", newPlant })
     } catch (error) {
-        res.status(400).json({ message: "Error creating plant.", error: error })
+        res.status(400).json({ error: "Internal error."})
     }
 }
 

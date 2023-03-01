@@ -8,10 +8,10 @@ const updateUser = async (req, res) => {
     try {
         //validation
         const { error } = services.validation.updateUser.validate(data)
-        if (error) return res.status(400).json({ message: error.details[0].message }) 
+        if (error) return res.status(400).json({ error: error.details[0].message }) 
         //cek username
         const foundUsername = await services.user.findUsername(data.username)
-        if (foundUsername && data.username !== selectedUser.username) return res.status(400).json({ message: "Username already exists" })
+        if (foundUsername && data.username !== selectedUser.username) return res.status(400).json({ error: "Username already exists" })
 
         else {
             const newUser = data
@@ -20,7 +20,7 @@ const updateUser = async (req, res) => {
             res.json({ message: "User updated succesfully.", updatedUser })
         }
     } catch (error) {
-        res.status(500).json({ message: "Error updating user.", error: error })
+        res.status(500).json({ error: "Internal error." })
     }
 }
 

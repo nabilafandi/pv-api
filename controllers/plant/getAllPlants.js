@@ -5,7 +5,7 @@ const getAllPlants =  async (req, res) => {
       const plants = await services.plant.findAllPlants()
       res.json(plants)
     } catch (error) {
-      res.status(500).json({ message: "Error fetching plants.", error: error })
+      res.status(500).json({ error: "Internal error."})
     }
   }
 

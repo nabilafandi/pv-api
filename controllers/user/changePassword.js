@@ -12,24 +12,24 @@ const changePassword = async (req, res) => {
     });
 
     if (error) {
-      return res.status(400).json({ message: error.details[0].message });
+      return res.status(400).json({ error: error.details[0].message });
     }
 
     // Find the user by username
     const user = await services.user.findUsername(username);
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ error: 'User not found' });
     }
 
     // Verify that the current password is correct
     const isMatch = await services.hash.comparePwd(currentPassword, user.password);
 
     if (!isMatch) {
-      return res.status(400).json({ message: 'Current password is incorrect' });
+      return res.status(400).json({ error: 'Current password is incorrect' });
     }
     if (req.body.newPassword !== req.body.repeatPassword)
-    return res.status(400).json({message: 'Passwords dont match'})
+    return res.status(400).json({error: 'Passwords dont match'})
 
     // Hash the new password
     const hashedPassword = await services.hash.hashPwd(newPassword);
@@ -39,7 +39,7 @@ const changePassword = async (req, res) => {
 
     return res.json({ message: 'Password changed successfully' });
   } catch (error) {
-    return res.status(500).json({ message: 'Error changing password', error });
+    return res.status(500).json({ error: 'Internal error'});
   }
 };
 

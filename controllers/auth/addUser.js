@@ -7,14 +7,14 @@ const addUser = async (req, res) => {
     try {
         //validasi
         const { error } = services.validation.addUser.validate(data)
-        if (error) { return res.status(400).json({ message: error.details[0].message }) }
+        if (error) { return res.status(400).json({ error: error.details[0].message }) }
         //cek req body username kosong
         if (!req.body.username) {
-            return res.status(400).json({ message: "username is empty" })
+            return res.status(400).json({ error: "username is empty" })
         }
         //cek username
         const foundUsername = await services.user.findUsername(data.username)
-        if (foundUsername) return res.status(400).json({ message: "Username already exists" })
+        if (foundUsername) return res.status(400).json({ error: "Username already exists" })
         //hash
         const hashedPwd = await services.hash.hashPwd(data.password)
         data.password = hashedPwd
@@ -23,7 +23,7 @@ const addUser = async (req, res) => {
         const createdUser = await excludePassword(newUser._id)
         res.status(200).json({ message: "User created succesfully", createdUser })
     } catch (error) {
-        res.status(500).json({ message: "Error creating user.", error: error })
+        res.status(500).json({ error: "Internal error." })
     }
 }
 

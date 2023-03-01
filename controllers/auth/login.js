@@ -7,10 +7,10 @@ const login = async (req, res) => {
   try {
     //validation
     const { error } = services.validation.login.validate(data)
-    if (error) { return res.status(400).json({ message: error.details[0].message }) }
+    if (error) { return res.status(400).json({ error: error.details[0].message }) }
     //cek req body username kosong
     if (!req.body.username) {
-      return res.status(400).json({ message: "username is empty"})
+      return res.status(400).json({ error: "username is empty"})
     }
     //cek username ada di database
     const foundUsername = await services.user.findUsername(data.username)
@@ -19,7 +19,7 @@ const login = async (req, res) => {
     }
     //cek password
     const matchPassword = await services.hash.comparePwd(data.password, foundUsername.password)
-    if (!matchPassword) return res.status(400).json({ message: "wrong password try again!" })
+    if (!matchPassword) return res.status(400).json({ error: "wrong password try again!" })
     //login sukses
     else {
       //jwt
@@ -40,7 +40,7 @@ const login = async (req, res) => {
     }
 
   } catch (error) {
-    res.status(500).json({ message: "error", error: error })
+    res.status(500).json({ error: "Internal error"})
   }
 }
 
