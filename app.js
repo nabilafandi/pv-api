@@ -10,7 +10,8 @@ const cookieParser = require("cookie-parser")
 const Link = require('./routes/index')
 const app = express();
 //middleware
-app.use(express.json());
+app.use(express.urlencoded({extended: false}))
+app.use(express.json({limit: "5MB"}));
 app.use(cookieParser())
 
 
