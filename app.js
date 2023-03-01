@@ -5,7 +5,8 @@ const dbconfig = require('./config/db.config')
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser")
-
+const cors = require("cors")
+const morgan = require("morgan")
 
 const Link = require('./routes/index')
 const app = express();
@@ -13,6 +14,8 @@ const app = express();
 app.use(express.urlencoded({extended: false}))
 app.use(express.json({limit: "5MB"}));
 app.use(cookieParser())
+app.use(cors())
+app.use(morgan("dev"))
 
 
 app.use('/', Link)
