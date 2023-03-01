@@ -15,7 +15,7 @@ const login = async (req, res) => {
     //cek username ada di database
     const foundUsername = await services.user.findUsername(data.username)
     if (!foundUsername) {
-      return res.status(404).json({ message: "wrong username" })
+      return res.status(404).json({ error: "Username not found" })
     }
     //cek password
     const matchPassword = await services.hash.comparePwd(data.password, foundUsername.password)

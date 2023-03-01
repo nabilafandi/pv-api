@@ -57,7 +57,7 @@ const Sensors = mongoose.Schema({
             },
         }),
     }
-})
+}, { timestamps: true })
 const Sensor = mongoose.model('sensor', Sensors)
 
 
