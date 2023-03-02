@@ -9,8 +9,8 @@ async function createNewPlant(data) {
     return createPlant;
 }
 
-async function findAllPlants() {
-    const plants = await Plant.find({})
+async function findAllPlants(id) {
+    const plants = await Plant.find({idUser: id})
     return plants
 }
 async function findPlantbyId(id) {
