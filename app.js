@@ -11,8 +11,8 @@ const morgan = require("morgan")
 const Link = require('./routes/index')
 const app = express();
 //middleware
-app.use(express.urlencoded({extended: false}))
 app.use(express.json({limit: "5MB"}));
+app.use(express.urlencoded({extended: false}))
 app.use(cookieParser())
 app.use(cors())
 app.use(morgan("dev"))
