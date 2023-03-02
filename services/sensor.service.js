@@ -7,26 +7,12 @@ async function createNewSensor(data) {
     return createSensor;
 }
 
-async function aggregateSensor(days, userId) {
+async function aggregateSensor(days, id) {
     const today = new Date()
     const otherDay = new Date()
     const when = new Date(otherDay.setDate(otherDay.getDate() - days))
-    // const result = Sensor
-    // .aggregate([
-    //     {
-    //         $match: {
-    //             createdAt: {$gt: when, $lte: today}
-    //         }
-    //     },
-    //     {
-    //         $group: {
-    //             _id: null,
-    //             total: { $avg: `$${ac}.E` }
-    //         }
-    //     },
-    // ])
     const result = await Sensor.find({
-        userId: s,
+        userId: id,
         createdAt: { $gt: when, $lte: today }
     },{ __v: 0 })
         .sort({ createdAt: -1 })

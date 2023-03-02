@@ -4,7 +4,7 @@ const Plants = mongoose.Schema({
     plant_id: {
         type: String,
     },
-    user: {
+    idUser: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "user"
     },
@@ -24,7 +24,7 @@ const Plants = mongoose.Schema({
         type: Number,
     },
     tanggal_instalasi: {
-        type: Date,
+        type: Number,
     },
     pv_unit: {
         type: String,
