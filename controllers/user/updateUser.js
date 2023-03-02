@@ -20,7 +20,7 @@ const updateUser = async (req, res) => {
             res.json({ message: "User updated succesfully.", updatedUser })
         }
     } catch (error) {
-        res.status(500).json({ error: "Internal error." })
+        res.status(500).json({ error})
     }
 }
 

@@ -14,17 +14,17 @@ async function aggregateSensorWeek(id) {
     const result = await Sensor.find({
         idUser: id,
         createdAt: { $gt: when, $lte: today }
-    },{ __v: 0 })
+    }, { __v: 0 })
         .sort({ createdAt: -1 })
-let newData = [];
-        for(let i=0; i< result.length; i++){
-            newData.push({
-                yAxis1: result[i].AC1.E,
-                yAxis2: result[i].AC2.E,
-                yAxis3: result[i].DC.E,
-                xAxis: Math.floor(new Date(result[i].createdAt)/1)
-            })
-        }
+    let newData = [];
+    for (let i = 0; i < result.length; i++) {
+        newData.push({
+            yAxis1: result[i].AC1.E,
+            yAxis2: result[i].AC2.E,
+            yAxis3: result[i].DC.E,
+            xAxis: Math.floor(new Date(result[i].createdAt) / 1)
+        })
+    }
     return newData
 }
 async function aggregateSensorMonth(id) {
@@ -34,17 +34,17 @@ async function aggregateSensorMonth(id) {
     const result = await Sensor.find({
         idUser: id,
         createdAt: { $gt: when, $lte: today }
-    },{ __v: 0 })
+    }, { __v: 0 })
         .sort({ createdAt: -1 })
-let newData = [];
-        for(let i=0; i< result.length; i++){
-            newData.push({
-                yAxis1: result[i].AC1.E,
-                yAxis2: result[i].AC2.E,
-                yAxis3: result[i].DC.E,
-                xAxis: Math.floor(new Date(result[i].createdAt)/1)
-            })
-        }
+    let newData = [];
+    for (let i = 0; i < result.length; i++) {
+        newData.push({
+            yAxis1: result[i].AC1.E,
+            yAxis2: result[i].AC2.E,
+            yAxis3: result[i].DC.E,
+            xAxis: Math.floor(new Date(result[i].createdAt) / 1)
+        })
+    }
     return newData
 }
 async function aggregateSensorYear(id) {
@@ -54,17 +54,17 @@ async function aggregateSensorYear(id) {
     const result = await Sensor.find({
         idUser: id,
         createdAt: { $gt: when, $lte: today }
-    },{ __v: 0 })
+    }, { __v: 0 })
         .sort({ createdAt: -1 })
-let newData = [];
-        for(let i=0; i< result.length; i++){
-            newData.push({
-                yAxis1: result[i].AC1.E,
-                yAxis2: result[i].AC2.E,
-                yAxis3: result[i].DC.E,
-                xAxis: Math.floor(new Date(result[i].createdAt)/1)
-            })
-        }
+    let newData = [];
+    for (let i = 0; i < result.length; i++) {
+        newData.push({
+            yAxis1: result[i].AC1.E,
+            yAxis2: result[i].AC2.E,
+            yAxis3: result[i].DC.E,
+            xAxis: Math.floor(new Date(result[i].createdAt) / 1)
+        })
+    }
     return newData
 }
 // console.log(aggregateSensor(1))

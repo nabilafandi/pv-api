@@ -39,7 +39,7 @@ const changePassword = async (req, res) => {
 
     return res.json({ message: 'Password changed successfully' });
   } catch (error) {
-    return res.status(500).json({ error: 'Internal error'});
+    return res.status(500).json({ error});
   }
 };
 

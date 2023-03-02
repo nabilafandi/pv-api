@@ -9,7 +9,7 @@ const deleteUser = async (req, res) => {
     await services.token.deleteTokenByUserId(req.params.id)
     res.json({ message: "User deleted succesfully.", deletedUser: deletedUser.username })
   } catch (error) {
-    res.status(500).json({ error: "Internal error." })
+    res.status(500).json({ error })
   }
 }
 module.exports = deleteUser

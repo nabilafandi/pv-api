@@ -49,6 +49,12 @@ const updatePlant = joi.object({
   pv_unit: joi.string(),
 })
 
+const aggregateSensor = joi.object({
+  time: joi.string().required(),
+  idUser: joi.string().required(),
+})
+
+
 
 module.exports = {
   addUser,
@@ -56,5 +62,6 @@ module.exports = {
   updateUser,
   addPlant,
   updatePlant,
-  changePassword
+  changePassword,
+  aggregateSensor
 }

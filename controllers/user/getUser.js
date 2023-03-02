@@ -10,7 +10,7 @@ const getUser = async (req, res) => {
       res.json(showUser)
     }
   } catch (error) {
-    res.status(500).json({ error: "Internal error." });
+    res.status(500).json({ error });
   }
 }
 
