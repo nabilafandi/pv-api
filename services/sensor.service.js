@@ -1,3 +1,4 @@
+const { startSession } = require('../models/sensor');
 const Sensor = require('../models/sensor');
 
 async function createNewSensor(data) {
@@ -6,11 +7,10 @@ async function createNewSensor(data) {
     return createSensor;
 }
 
-async function aggregateSensor(days) {
+async function aggregateSensor(days, userId) {
     const today = new Date()
     const otherDay = new Date()
     const when = new Date(otherDay.setDate(otherDay.getDate() - days))
-
     // const result = Sensor
     // .aggregate([
     //     {
@@ -25,8 +25,8 @@ async function aggregateSensor(days) {
     //         }
     //     },
     // ])
-
     const result = await Sensor.find({
+        userId: s,
         createdAt: { $gt: when, $lte: today }
     },{ __v: 0 })
         .sort({ createdAt: -1 })
