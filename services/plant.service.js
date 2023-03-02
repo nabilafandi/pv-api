@@ -1,8 +1,10 @@
 const Plant = require('../models/plants');
 
 
+
 async function createNewPlant(data) {
     const createPlant = new Plant(data);
+    createPlant.plant_id = Math.random().toString(36).substring(2, 10);
     await createPlant.save();
     return createPlant;
 }

@@ -35,6 +35,7 @@ const addPlant = joi.object({
   longitude: joi.number(),
   pv_capacity: joi.number(),
   tanggal_instalasi: joi.date(),
+  pv_unit: joi.string(),
 })
 
 const updatePlant = joi.object({
@@ -44,6 +45,7 @@ const updatePlant = joi.object({
   longitude: joi.number(),
   pv_capacity: joi.number(),
   tanggal_instalasi: joi.date(),
+  pv_unit: joi.string(),
 })
 
 

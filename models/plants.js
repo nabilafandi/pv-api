@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const Plants = mongoose.Schema({
     plant_id: {
         type: String,
