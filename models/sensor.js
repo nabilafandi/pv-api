@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 const Sensors = mongoose.Schema({
+    sensor_id: {
+        type: String,
+    },
     plant: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "plant"

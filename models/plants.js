@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const Plants = mongoose.Schema({
+    plant_id: {
+        type: String,
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "user"
