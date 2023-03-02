@@ -11,7 +11,7 @@ const addSensor = async (req, res) => {
         const newSensor = await createNewSensor(data)
         res.status(200).json({ message: "Sensor created succesfully", newSensor })
     } catch (error) {
-        res.status(400).json({ error: "Internal error.", data})
+        res.status(400).json({ error})
     }
 }
 

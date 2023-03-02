@@ -12,7 +12,7 @@ async function aggregateSensorWeek(id) {
     const otherDay = new Date()
     const when = new Date(otherDay.setDate(otherDay.getDate() - 7))
     const result = await Sensor.find({
-        userId: id,
+        idUser: id,
         createdAt: { $gt: when, $lte: today }
     },{ __v: 0 })
         .sort({ createdAt: -1 })
@@ -32,7 +32,7 @@ async function aggregateSensorMonth(id) {
     const otherDay = new Date()
     const when = new Date(otherDay.setDate(otherDay.getDate() - 30))
     const result = await Sensor.find({
-        userId: id,
+        idUser: id,
         createdAt: { $gt: when, $lte: today }
     },{ __v: 0 })
         .sort({ createdAt: -1 })
@@ -52,7 +52,7 @@ async function aggregateSensorYear(id) {
     const otherDay = new Date()
     const when = new Date(otherDay.setDate(otherDay.getDate() - 365))
     const result = await Sensor.find({
-        userId: id,
+        idUser: id,
         createdAt: { $gt: when, $lte: today }
     },{ __v: 0 })
         .sort({ createdAt: -1 })
@@ -69,6 +69,7 @@ let newData = [];
 }
 // console.log(aggregateSensor(1))
 module.exports = {
+    createNewSensor,
     aggregateSensorWeek,
     aggregateSensorMonth,
     aggregateSensorYear
