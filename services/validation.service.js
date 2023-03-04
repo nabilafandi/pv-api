@@ -53,8 +53,31 @@ const aggregateSensor = joi.object({
   time: joi.string().required(),
   idUser: joi.string().required(),
 })
-
-
+const addSensor = joi.object({
+  idUser: joi.string().required(),
+  AC1: joi.object({
+    E: joi.number().required(),
+    Vrms: joi.number().required(),
+    Irms: joi.number().required(),
+    P: joi.number().required(),
+    Q: joi.number().required(),
+    S: joi.number().required()
+  }).required(),
+  AC2: joi.object({
+    E: joi.number().required(),
+    Vrms: joi.number().required(),
+    Irms: joi.number().required(),
+    P: joi.number().required(),
+    Q: joi.number().required(),
+    S: joi.number().required()
+  }).required(),
+  DC: joi.object({
+    E: joi.number().required(),
+    V: joi.number().required(),
+    I: joi.number().required(),
+    P: joi.number().required()
+  }).required()
+});
 
 module.exports = {
   addUser,
@@ -63,5 +86,6 @@ module.exports = {
   addPlant,
   updatePlant,
   changePassword,
-  aggregateSensor
+  aggregateSensor,
+  addSensor
 }
