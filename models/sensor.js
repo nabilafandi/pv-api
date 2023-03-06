@@ -23,6 +23,9 @@ const Sensors = mongoose.Schema({
             S: {
                 type: Number
             },
+            PF: {
+                type: Number
+            },
         }),
     },
     AC2: {
@@ -43,6 +46,9 @@ const Sensors = mongoose.Schema({
                 type: Number
             },
             S: {
+                type: Number
+            },
+            PF: {
                 type: Number
             },
         }),

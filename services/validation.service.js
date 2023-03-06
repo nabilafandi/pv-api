@@ -62,7 +62,8 @@ const addSensor = joi.object({
     Irms: joi.number().required(),
     P: joi.number().required(),
     Q: joi.number().required(),
-    S: joi.number().required()
+    S: joi.number().required(),
+    PF: joi.number().required()
   }).required(),
   AC2: joi.object({
     E: joi.number().required(),
@@ -70,7 +71,8 @@ const addSensor = joi.object({
     Irms: joi.number().required(),
     P: joi.number().required(),
     Q: joi.number().required(),
-    S: joi.number().required()
+    S: joi.number().required(),
+    PF: joi.number().required()
   }).required(),
   DC: joi.object({
     E: joi.number().required(),
