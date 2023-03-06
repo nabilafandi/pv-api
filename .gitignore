@@ -3,4 +3,4 @@ temp/
 .env
 node_modules
 app.js
-config
+config/
