@@ -36,7 +36,8 @@ const addPlant = joi.object({
   pv_capacity: joi.number(),
   tanggal_instalasi: joi.date(),
   pv_unit: joi.string(),
-  idUser: joi.string()
+  idUser: joi.string(),
+  plant_id: joi.string().required(),
 })
 
 const updatePlant = joi.object({
