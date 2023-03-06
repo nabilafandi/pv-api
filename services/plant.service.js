@@ -13,6 +13,10 @@ async function findAllPlants(id) {
     const plants = await Plant.find({ idUser: id })
     return plants
 }
+async function findAllPlantsbyPlant_id(id) {
+    const plants = await Plant.find({ plant_id: id })
+    return plants
+}
 async function findPlantbyId(id) {
     const plant = await Plant.findById(id)
     return plant
@@ -41,5 +45,6 @@ module.exports = {
     updatePlant,
     deletebyId,
     findByPlantId,
-    findByPlantName
+    findByPlantName,
+    findAllPlantsbyPlant_id
 }
