@@ -1,11 +1,14 @@
 const { startSession } = require('../models/sensor');
 const Sensor = require('../models/sensor');
 
+
+
 async function createNewSensor(data) {
     const createSensor = new Sensor(data);
     await createSensor.save();
     return createSensor;
 }
+
 
 async function aggregateSensorWeek(id) {
     const today = new Date()
@@ -25,7 +28,25 @@ async function aggregateSensorWeek(id) {
             xAxis: Math.floor(new Date(result[i].createdAt) / 1)
         })
     }
-    return newData
+    const filterbyDay = await Sensor.aggregate([
+        {
+            $match: {
+                idUser: id,
+                createdAt: { $gt: when, $lte: today }
+            }
+        },
+        {
+            $group: {
+                _id: {
+                    year: { $year: "$createdAt" },
+                    month: { $month: "$createdAt" },
+                    day: { $dayOfMonth: "$createdAt" }
+                },
+                count: { $sum: 1 }
+            }
+        }
+    ]);
+    return [newData,filterbyDay]
 }
 async function aggregateSensorMonth(id) {
     const today = new Date()
@@ -45,7 +66,25 @@ async function aggregateSensorMonth(id) {
             xAxis: Math.floor(new Date(result[i].createdAt) / 1)
         })
     }
-    return newData
+    const filterbyDay = await Sensor.aggregate([
+        {
+            $match: {
+                idUser: id,
+                createdAt: { $gt: when, $lte: today }
+            }
+        },
+        {
+            $group: {
+                _id: {
+                    year: { $year: "$createdAt" },
+                    month: { $month: "$createdAt" },
+                    day: { $dayOfMonth: "$createdAt" }
+                },
+                count: { $sum: 1 }
+            }
+        }
+    ]);
+    return [newData,filterbyDay]
 }
 async function aggregateSensorYear(id) {
     const today = new Date()
@@ -65,12 +104,31 @@ async function aggregateSensorYear(id) {
             xAxis: Math.floor(new Date(result[i].createdAt) / 1)
         })
     }
-    return newData
+    const filterbyDay = await Sensor.aggregate([
+        {
+            $match: {
+                idUser: id,
+                createdAt: { $gt: when, $lte: today }
+            }
+        },
+        {
+            $group: {
+                _id: {
+                    year: { $year: "$createdAt" },
+                    month: { $month: "$createdAt" },
+                    day: { $dayOfMonth: "$createdAt" }
+                },
+                count: { $sum: 1 }
+            }
+        }
+    ]);
+    return [newData,filterbyDay]
 }
+
 // console.log(aggregateSensor(1))
 module.exports = {
     createNewSensor,
     aggregateSensorWeek,
     aggregateSensorMonth,
-    aggregateSensorYear
+    aggregateSensorYear,
 }
