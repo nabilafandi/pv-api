@@ -16,7 +16,7 @@ const getAllPlants = async (req, res) => {
   //validasi id
   if (!validation(query.idUser)) return res.status(400).json({ error: "idUser is not valid" })
   try {
-    const plants = await services.plant.findAllPlants(query.idUser)
+    const plants = await services.plant.findAllPlants(query.idUser, query.offset, query.limit)
     res.json(plants)
   } catch (error) {
     res.status(500).json({ error })
