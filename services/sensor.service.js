@@ -46,7 +46,7 @@ async function aggregateSensorWeek(id) {
             }
         }
     ]);
-    return [newData,filterbyDay]
+    return {newData,filterbyDay}
 }
 async function aggregateSensorMonth(id) {
     const today = new Date()
@@ -84,7 +84,7 @@ async function aggregateSensorMonth(id) {
             }
         }
     ]);
-    return [newData,filterbyDay]
+    return {newData,filterbyDay}
 }
 async function aggregateSensorYear(id) {
     const today = new Date()
@@ -122,7 +122,7 @@ async function aggregateSensorYear(id) {
             }
         }
     ]);
-    return [newData,filterbyDay]
+    return {newData,filterbyDay}
 }
 
 // console.log(aggregateSensor(1))

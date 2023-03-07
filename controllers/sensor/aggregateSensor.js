@@ -27,8 +27,9 @@ const aggregate = async (req, res) => {
         if (time === "year") {
             aggregated = await aggregateSensorYear(idUser)
         }
+
         return res.status(200).json({
-            aggregated
+            aggregated: Object.values(aggregated)
         })
     } catch (error) {
         res.status(500).json({ error })
