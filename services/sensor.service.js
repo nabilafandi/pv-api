@@ -46,7 +46,7 @@ async function aggregateSensorWeek(id) {
             }
         }
     ]);
-    return {newData,filterbyDay}
+    return { newData, filterbyDay }
 }
 async function aggregateSensorMonth(id) {
     const today = new Date()
@@ -84,7 +84,7 @@ async function aggregateSensorMonth(id) {
             }
         }
     ]);
-    return {newData,filterbyDay}
+    return { newData, filterbyDay }
 }
 async function aggregateSensorYear(id) {
     const today = new Date()
@@ -122,13 +122,23 @@ async function aggregateSensorYear(id) {
             }
         }
     ]);
-    return {newData,filterbyDay}
+    return { newData, filterbyDay }
 }
 
+
+async function deleteSensor(id) {
+    try {
+        sensordeleted = await Sensor.deleteMany({idUser: id})
+        return sensordeleted
+    } catch (error) {
+        return error
+    }
+}
 // console.log(aggregateSensor(1))
 module.exports = {
     createNewSensor,
     aggregateSensorWeek,
     aggregateSensorMonth,
     aggregateSensorYear,
+    deleteSensor
 }
