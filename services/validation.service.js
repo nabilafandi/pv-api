@@ -34,7 +34,7 @@ const addPlant = joi.object({
   latitude: joi.number(),
   longitude: joi.number(),
   pv_capacity: joi.number(),
-  tanggal_instalasi: joi.date(),
+  tanggal_instalasi: joi.number(),
   pv_unit: joi.string(),
   idUser: joi.string(),
   plant_id: joi.string().required(),
@@ -46,10 +46,10 @@ const updatePlant = joi.object({
   latitude: joi.number(),
   longitude: joi.number(),
   pv_capacity: joi.number(),
-  tanggal_instalasi: joi.date(),
+  tanggal_instalasi: joi.number(),
   pv_unit: joi.string(),
 })
-
+//sensor
 const aggregateSensor = joi.object({
   time: joi.string().required(),
   idUser: joi.string().required(),
