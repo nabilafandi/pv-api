@@ -8,7 +8,8 @@ const latestData = async (req, res) => {
         if (error) { return res.status(400).json({ message: error.details[0].message }) }
         //find the latest data
         const latestData = await services.sensor.getlatest(idUser)
-        If (!latestData) {return res.status(404).json({error: "no sensor found"})}
+        if (!latestData) return res.status(404).json({ error: "no sensor found" })
+
         res.status(200).json({ latestData })
     } catch (error) {
         res.status(500).json({ error })
