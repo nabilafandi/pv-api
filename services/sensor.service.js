@@ -134,11 +134,22 @@ async function deleteSensor(id) {
         return error
     }
 }
+
+async function getlatest() {
+    try {
+        const latest = await Sensor.findOne({}).sort({ createdAt: -1 })
+        return latest
+    } catch (error) {
+        return error
+    }
+
+}
 // console.log(aggregateSensor(1))
 module.exports = {
     createNewSensor,
     aggregateSensorWeek,
     aggregateSensorMonth,
     aggregateSensorYear,
-    deleteSensor
+    deleteSensor,
+    getlatest
 }

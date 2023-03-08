@@ -7,5 +7,7 @@ const Sensors = express.Router()
 Sensors.route('/')
     .post(Sensor.addSensor)
     .get(Sensor.aggregate)
+Sensors.route('/latest')
+    .get(Sensor.latestData)
 
 module.exports = Sensors
