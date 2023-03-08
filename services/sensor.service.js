@@ -128,16 +128,16 @@ async function aggregateSensorYear(id) {
 
 async function deleteSensor(id) {
     try {
-        sensordeleted = await Sensor.deleteMany({idUser: id})
+        sensordeleted = await Sensor.deleteMany({ idUser: id })
         return sensordeleted
     } catch (error) {
         return error
     }
 }
 
-async function getlatest() {
+async function getlatest(id) {
     try {
-        const latest = await Sensor.findOne({}).sort({ createdAt: -1 })
+        const latest = await Sensor.findOne({ idUser: id }).sort({ createdAt: -1 })
         return latest
     } catch (error) {
         return error

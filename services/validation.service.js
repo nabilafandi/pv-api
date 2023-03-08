@@ -81,7 +81,9 @@ const addSensor = joi.object({
     P: joi.number().required()
   }).required()
 });
-
+const getlatestdata = joi.object({
+  idUser: joi.string().required(),
+})
 module.exports = {
   addUser,
   login,
@@ -90,5 +92,6 @@ module.exports = {
   updatePlant,
   changePassword,
   aggregateSensor,
-  addSensor
+  addSensor,
+  getlatestdata
 }
