@@ -1,5 +1,5 @@
 const { findByPlantId } = require('../../services/plant.service')
-const { aggregateSensorMonth, aggregateSensorWeek, aggregateSensorYear, aggregateSensor, filterbyDay } = require('../../services/sensor.service')
+const { aggregateSensorMonth, aggregateSensorWeek, aggregateSensorYear, aggregateSensor, filterbyDay, findByTime } = require('../../services/sensor.service')
 const services = require('../../services/services')
 
 const aggregate = async (req, res) => {
@@ -16,21 +16,10 @@ const aggregate = async (req, res) => {
         //cek idUser sudah ada
         const cekplant_id = await findByPlantId(idUser)
         if (cekplant_id < 1) return res.status(404).json({ error: "idUser not found" })
-        //cek time
-        let aggregated
-        if (time === "day") {
-            aggregated = await aggregateSensorWeek(idUser)
-        }
-        if (time === "month") {
-            aggregated = await aggregateSensorMonth(idUser)
-        }
-        if (time === "year") {
-            aggregated = await aggregateSensorYear(idUser)
-        }
 
+        const aggregate = await findByTime(time, idUser)
         return res.status(200).json({
-            aggregate : aggregated.newData,
-            days : aggregated.filterbyDay
+            aggregate
         })
     } catch (error) {
         res.status(500).json({ error })

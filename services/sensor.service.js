@@ -142,8 +142,136 @@ async function getlatest(id) {
     } catch (error) {
         return error
     }
-
 }
+
+let db = Sensor
+async function findByTime(type,id){
+    try{
+        const dateMain = new Date;
+        let dateFirst = new Date(dateMain);
+        if(type === "day"){
+            const result = await db.aggregate([
+                {
+                    $match: {
+                        idUser: id,
+                        createdAt: {$gte: new Date(dateFirst.setDate(dateFirst.getDate()-1)), $lte: new Date(dateMain)},
+                        "AC1.E": { $ne: null },
+                        "AC2.E": { $ne: null },
+                        "DC.E": { $ne: null },
+                    }
+                },
+                {
+                    $project: {
+                        hour: {
+                            // $hour: "$createdAt"
+                            $dateToString: { format: "%H:%M", date: "$createdAt" }
+                        },
+                        AC1: "$AC1.E",
+                        AC2: "$AC2.E",
+                        DC: "$DC.E"
+                    }
+                },
+                {
+                    $group: {
+                        _id: {
+                            time: "$hour",
+                        },
+                        AC1: {$max: "$AC1"},
+                        AC2: {$max: "$AC2"},
+                        DC: {$max: "$DC"}
+                    }
+                },
+                {
+                    $sort: {
+                        "_id.time": 1
+                    }
+                }
+            ])
+            return result
+        }
+        if(type === "month"){
+            const result = await db.aggregate([
+                {
+                    $match: {
+                        createdAt: {$gte: new Date(dateFirst.setMonth(dateFirst.getMonth()-4)), $lte: new Date(dateMain)},
+                        "AC1.E": { $ne: null },
+                        "AC2.E": { $ne: null },
+                        "DC.E": { $ne: null },
+                    }
+                },
+                {
+                    $project: {
+                        date: {
+                            // $month: "$createdAt"
+                            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" }
+                        },
+                        AC1: "$AC1.E",
+                        AC2: "$AC2.E",
+                        DC: "$DC.E"
+                    }
+                },
+                {
+                    $group: {
+                        _id: {
+                            time: "$date"
+                        },
+                        AC1: {$max: "$AC1"},
+                        AC2: {$max: "$AC2"},
+                        DC: {$max: "$DC"}
+                    }
+                },
+                {
+                    $sort: {
+                        "_id.time": 1
+                    }
+                }
+            ])
+            return result
+        }
+        if(type === "year"){
+            const result = await db.aggregate([
+                {
+                    $match: {
+                        createdAt: {$gte: new Date(dateFirst.setFullYear(dateFirst.getFullYear()-1)), $lte: new Date(dateMain)},
+                        "AC1.E": { $ne: null },
+                        "AC2.E": { $ne: null },
+                        "DC.E": { $ne: null },
+                    }
+                },
+                {
+                    $project: {
+                        date: {
+                            // $month: "$createdAt"
+                            $dateToString: { format: "%Y", date: "$createdAt" }
+                        },
+                        AC1: "$AC1.E",
+                        AC2: "$AC2.E",
+                        DC: "$DC.E"
+                    }
+                },
+                {
+                    $group: {
+                        _id: {
+                            time: "$date"
+                        },
+                        AC1: {$max: "$AC1"},
+                        AC2: {$max: "$AC2"},
+                        DC: {$max: "$DC"}
+                    }
+                },
+                {
+                    $sort: {
+                        "_id.time": 1
+                    }
+                }
+            ])
+            return result
+        }
+    }catch (error){
+        return error
+    }
+}
+
 // console.log(aggregateSensor(1))
 module.exports = {
     createNewSensor,
@@ -151,5 +279,6 @@ module.exports = {
     aggregateSensorMonth,
     aggregateSensorYear,
     deleteSensor,
-    getlatest
+    getlatest,
+    findByTime
 }
