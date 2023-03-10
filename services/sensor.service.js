@@ -242,6 +242,45 @@ async function findByTime(type,id){
                     $project: {
                         date: {
                             // $month: "$createdAt"
+                            $dateToString: { format: "%Y-%m", date: "$createdAt" }
+                        },
+                        AC1: "$AC1.E",
+                        AC2: "$AC2.E",
+                        DC: "$DC.E"
+                    }
+                },
+                {
+                    $group: {
+                        _id: {
+                            time: "$date"
+                        },
+                        AC1: {$max: "$AC1"},
+                        AC2: {$max: "$AC2"},
+                        DC: {$max: "$DC"}
+                    }
+                },
+                {
+                    $sort: {
+                        "_id.time": 1
+                    }
+                }
+            ])
+            return result
+        }
+        if(type === "total"){
+            const result = await db.aggregate([
+                {
+                    $match: {
+                        createdAt: {$gte: new Date(dateFirst.setFullYear(dateFirst.getFullYear()-1)), $lte: new Date(dateMain)},
+                        "AC1.E": { $ne: null },
+                        "AC2.E": { $ne: null },
+                        "DC.E": { $ne: null },
+                    }
+                },
+                {
+                    $project: {
+                        date: {
+                            // $month: "$createdAt"
                             $dateToString: { format: "%Y", date: "$createdAt" }
                         },
                         AC1: "$AC1.E",
