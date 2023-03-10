@@ -164,7 +164,7 @@ async function findByTime(type, id) {
                     $project: {
                         hour: {
                             // $hour: "$createdAt"
-                            $dateToString: { format: "%H:%M", date: "$createdAt" }
+                            $dateToString: { format: "%H", date: "$createdAt" }
                         },
                         AC1: "$AC1.E",
                         AC2: "$AC2.E",
