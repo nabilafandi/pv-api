@@ -145,16 +145,16 @@ async function getlatest(id) {
 }
 
 let db = Sensor
-async function findByTime(type,id){
-    try{
+async function findByTime(type, id) {
+    try {
         const dateMain = new Date;
         let dateFirst = new Date(dateMain);
-        if(type === "day"){
+        if (type === "day") {
             const result = await db.aggregate([
                 {
                     $match: {
                         idUser: id,
-                        createdAt: {$gte: new Date(dateFirst.setDate(dateFirst.getDate()-1)), $lte: new Date(dateMain)},
+                        createdAt: { $gte: new Date(dateFirst.setDate(dateFirst.getDate() - 1)), $lte: new Date(dateMain) },
                         "AC1.E": { $ne: null },
                         "AC2.E": { $ne: null },
                         "DC.E": { $ne: null },
@@ -176,9 +176,9 @@ async function findByTime(type,id){
                         _id: {
                             time: "$hour",
                         },
-                        AC1: {$max: "$AC1"},
-                        AC2: {$max: "$AC2"},
-                        DC: {$max: "$DC"}
+                        AC1: { $max: "$AC1" },
+                        AC2: { $max: "$AC2" },
+                        DC: { $max: "$DC" }
                     }
                 },
                 {
@@ -189,11 +189,13 @@ async function findByTime(type,id){
             ])
             return result
         }
-        if(type === "month"){
+        if (type === "month") {
             const result = await db.aggregate([
                 {
                     $match: {
-                        createdAt: {$gte: new Date(dateFirst.setMonth(dateFirst.getMonth()-4)), $lte: new Date(dateMain)},
+                        idUser: id,
+
+                        createdAt: { $gte: new Date(dateFirst.setMonth(dateFirst.getMonth() - 4)), $lte: new Date(dateMain) },
                         "AC1.E": { $ne: null },
                         "AC2.E": { $ne: null },
                         "DC.E": { $ne: null },
@@ -215,9 +217,9 @@ async function findByTime(type,id){
                         _id: {
                             time: "$date"
                         },
-                        AC1: {$max: "$AC1"},
-                        AC2: {$max: "$AC2"},
-                        DC: {$max: "$DC"}
+                        AC1: { $max: "$AC1" },
+                        AC2: { $max: "$AC2" },
+                        DC: { $max: "$DC" }
                     }
                 },
                 {
@@ -228,11 +230,13 @@ async function findByTime(type,id){
             ])
             return result
         }
-        if(type === "year"){
+        if (type === "year") {
             const result = await db.aggregate([
                 {
                     $match: {
-                        createdAt: {$gte: new Date(dateFirst.setFullYear(dateFirst.getFullYear()-1)), $lte: new Date(dateMain)},
+                        idUser: id,
+
+                        createdAt: { $gte: new Date(dateFirst.setFullYear(dateFirst.getFullYear() - 1)), $lte: new Date(dateMain) },
                         "AC1.E": { $ne: null },
                         "AC2.E": { $ne: null },
                         "DC.E": { $ne: null },
@@ -254,9 +258,9 @@ async function findByTime(type,id){
                         _id: {
                             time: "$date"
                         },
-                        AC1: {$max: "$AC1"},
-                        AC2: {$max: "$AC2"},
-                        DC: {$max: "$DC"}
+                        AC1: { $max: "$AC1" },
+                        AC2: { $max: "$AC2" },
+                        DC: { $max: "$DC" }
                     }
                 },
                 {
@@ -267,11 +271,13 @@ async function findByTime(type,id){
             ])
             return result
         }
-        if(type === "total"){
+        if (type === "total") {
             const result = await db.aggregate([
                 {
                     $match: {
-                        createdAt: {$gte: new Date(dateFirst.setFullYear(dateFirst.getFullYear()-1)), $lte: new Date(dateMain)},
+                        idUser: id,
+
+                        createdAt: { $gte: new Date(dateFirst.setFullYear(dateFirst.getFullYear() - 1)), $lte: new Date(dateMain) },
                         "AC1.E": { $ne: null },
                         "AC2.E": { $ne: null },
                         "DC.E": { $ne: null },
@@ -293,9 +299,9 @@ async function findByTime(type,id){
                         _id: {
                             time: "$date"
                         },
-                        AC1: {$max: "$AC1"},
-                        AC2: {$max: "$AC2"},
-                        DC: {$max: "$DC"}
+                        AC1: { $max: "$AC1" },
+                        AC2: { $max: "$AC2" },
+                        DC: { $max: "$DC" }
                     }
                 },
                 {
@@ -306,7 +312,7 @@ async function findByTime(type,id){
             ])
             return result
         }
-    }catch (error){
+    } catch (error) {
         return error
     }
 }
