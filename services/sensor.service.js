@@ -164,7 +164,7 @@ async function findByTime(type, id) {
                     $project: {
                         hour: {
                             // $hour: "$createdAt"
-                            $dateToString: { format: "%H", date: "$createdAt" }
+                            $dateToString: { format: "%H:%M", date:  { $subtract: [ "$createdAt", -25200000 ] } }
                         },
                         AC1: "$AC1.E",
                         AC2: "$AC2.E",
@@ -195,7 +195,7 @@ async function findByTime(type, id) {
                     $match: {
                         idUser: id,
 
-                        createdAt: { $gte: new Date(dateFirst.setMonth(dateFirst.getMonth() - 4)), $lte: new Date(dateMain) },
+                        createdAt: { $gte: new Date(dateFirst.setMonth(dateFirst.getMonth() - 1)), $lte: new Date(dateMain) },
                         "AC1.E": { $ne: null },
                         "AC2.E": { $ne: null },
                         "DC.E": { $ne: null },
@@ -205,7 +205,7 @@ async function findByTime(type, id) {
                     $project: {
                         date: {
                             // $month: "$createdAt"
-                            $dateToString: { format: "%Y-%m-%d", date: "$createdAt" }
+                            $dateToString: { format: "%Y-%m-%d", date:  { $subtract: [ "$createdAt", -25200000 ] } }
                         },
                         AC1: "$AC1.E",
                         AC2: "$AC2.E",
@@ -246,7 +246,7 @@ async function findByTime(type, id) {
                     $project: {
                         date: {
                             // $month: "$createdAt"
-                            $dateToString: { format: "%Y-%m", date: "$createdAt" }
+                            $dateToString: { format: "%Y-%m", date:  { $subtract: [ "$createdAt", -25200000 ] } }
                         },
                         AC1: "$AC1.E",
                         AC2: "$AC2.E",
@@ -287,7 +287,7 @@ async function findByTime(type, id) {
                     $project: {
                         date: {
                             // $month: "$createdAt"
-                            $dateToString: { format: "%Y", date: "$createdAt" }
+                            $dateToString: { format: "%Y", date:  { $subtract: [ "$createdAt", -25200000 ] } }
                         },
                         AC1: "$AC1.E",
                         AC2: "$AC2.E",
