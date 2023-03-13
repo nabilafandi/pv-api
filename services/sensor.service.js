@@ -162,10 +162,8 @@ async function findByTime(type, id) {
                 },
                 {
                     $project: {
-                        hour: {
-                            // $hour: "$createdAt"
-                            $dateToString: { format: "%H:%M", date:  { $subtract: [ "$createdAt", -25200000 ] } }
-                        },
+                        date: { $dateToString: { format: "%Y/%m/%d", date: { $subtract: [ "$createdAt", -25200000 ] } } },
+                        hour: { $dateToString: { format: "%H:%M", date:  { $subtract: [ "$createdAt", -25200000 ] } } },
                         AC1: "$AC1.E",
                         AC2: "$AC2.E",
                         DC: "$DC.E"
@@ -174,7 +172,8 @@ async function findByTime(type, id) {
                 {
                     $group: {
                         _id: {
-                            time: "$hour",
+                            date: "$date",
+                            hour: "$hour",
                         },
                         AC1: { $max: "$AC1" },
                         AC2: { $max: "$AC2" },
@@ -183,7 +182,8 @@ async function findByTime(type, id) {
                 },
                 {
                     $sort: {
-                        "_id.time": 1
+                        "_id.date": 1,
+                        "_id.hour": 1
                     }
                 }
             ])
@@ -235,7 +235,6 @@ async function findByTime(type, id) {
                 {
                     $match: {
                         idUser: id,
-
                         createdAt: { $gte: new Date(dateFirst.setFullYear(dateFirst.getFullYear() - 1)), $lte: new Date(dateMain) },
                         "AC1.E": { $ne: null },
                         "AC2.E": { $ne: null },

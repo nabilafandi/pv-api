@@ -10,6 +10,29 @@
     "midtrans-client": "^1.3.1",
     "mongoose": "^6.9.0",
     "morgan": "^1.10.0",
+    "socket.io": "^4.6.1",
     "swagger-ui-express": "^4.6.0"
-  }
+  },
+  "name": "pv-api",
+  "description": "[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/25421984-e0274bd5-4f57-4dfa-9688-947707a5864f?action=collection%2Ffork&collection-url=entityId%3D25421984-e0274bd5-4f57-4dfa-9688-947707a5864f%26entityType%3Dcollection%26workspaceId%3Dc3e8b60f-2f03-4663-8945-0234e292482b)",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nabilafandi/pv-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nabilafandi/pv-api/issues"
+  },
+  "homepage": "https://github.com/nabilafandi/pv-api#readme"
 }
