@@ -154,7 +154,7 @@ async function findByTime(type, id) {
                 {
                     $match: {
                         idUser: id,
-                        createdAt: { $gte: new Date(dateFirst.setDate(dateFirst.getDate() - 1)), $lte: new Date(dateMain) },
+                        createdAt: { $gte: new Date(dateFirst.setDate(dateFirst.getDate() - 1)), $lte: new Date(dateMain)},
                         "AC1.E": { $ne: null },
                         "AC2.E": { $ne: null },
                         "DC.E": { $ne: null },
@@ -163,7 +163,13 @@ async function findByTime(type, id) {
                 {
                     $project: {
                         date: { $dateToString: { format: "%Y/%m/%d", date: { $subtract: [ "$createdAt", -25200000 ] } } },
-                        hour: { $dateToString: { format: "%H:%M", date:  { $subtract: [ "$createdAt", -25200000 ] } } },
+                        hour: { $dateToString: { format: "%H", date:  { $subtract: [ "$createdAt", -25200000 ] } } },
+                        minute: {
+                            $subtract: [
+                                { $minute: { $subtract: ["$createdAt", -25200000] } },
+                                { $mod: [{ $minute: { $subtract: ["$createdAt", -25200000] } }, 5] }
+                            ]
+                        },
                         AC1: "$AC1.E",
                         AC2: "$AC2.E",
                         DC: "$DC.E"
@@ -173,7 +179,8 @@ async function findByTime(type, id) {
                     $group: {
                         _id: {
                             date: "$date",
-                            hour: "$hour",
+                            time: "$hour",
+                            minute: "$minute"
                         },
                         AC1: { $max: "$AC1" },
                         AC2: { $max: "$AC2" },
@@ -183,7 +190,8 @@ async function findByTime(type, id) {
                 {
                     $sort: {
                         "_id.date": 1,
-                        "_id.hour": 1
+                        "_id.time": 1,
+                        "_id.minute": 1
                     }
                 }
             ])

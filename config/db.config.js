@@ -1,7 +1,7 @@
 module.exports = {
-    HOST: "192.168.2.8",
+    HOST: "202.148.1.57",
     PORT: 27017,
-    DB: "pv_db",
-    user: "xrkPv",
-    password: "XpV123123",
+    DB: "new_pv",
+    user: "pvXy123",
+    password: "HBi8agY1XFO25aaWs0LpWS",
   };
