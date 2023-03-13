@@ -10,12 +10,14 @@ async function createNewPlant(data) {
 }
 
 async function findAllPlants(id, offset, limit) {
+    const count = await Plant.find({ idUser: id }).count();
     const plants = await Plant.find({ idUser: id }).skip(offset).limit(limit)
-    return plants
+    return {count, plants}
 }
 async function findAllPlantsbyPlant_id(id) {
+    const count  = await Plant.find({plant_id: id}).count();
     const plants = await Plant.find({ plant_id: id })
-    return plants
+    return {count, plants}
 }
 async function findPlantbyId(id) {
     const plant = await Plant.findById(id)
