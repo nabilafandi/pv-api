@@ -9,6 +9,10 @@ async function createNewSensor(data) {
     return createSensor;
 }
 
+async function getAllSensorById(id) {
+    return Sensor.find({idUser: id}, {_id: 0, __v: 0, "AC1._id": 0, "AC2._id": 0, "DC._id": 0});
+}
+
 
 async function aggregateSensorWeek(id) {
     const today = new Date()
@@ -332,5 +336,6 @@ module.exports = {
     aggregateSensorYear,
     deleteSensor,
     getlatest,
-    findByTime
+    findByTime,
+    getAllSensorById
 }
