@@ -24,6 +24,7 @@ app.use('/', Link)
 
 //configure mongoose
 mongoose.set('strictQuery', false);
+dbconfig.user ? 
 mongoose.connect(`mongodb://${dbconfig.user}:${dbconfig.password}@${dbconfig.HOST}:${dbconfig.PORT}/${dbconfig.DB}`,
     {
         useNewUrlParser: true,
@@ -33,10 +34,24 @@ mongoose.connect(`mongodb://${dbconfig.user}:${dbconfig.password}@${dbconfig.HOS
         if (err) {
             console.log(err);
         } else {
-            console.log("Connected to MongoDB");
+            console.log(`Connected to MongoDB ${dbconfig.HOST}/${dbconfig.PORT}`);
         }
     }
-);
+) :
+mongoose.connect(`mongodb://127.0.0.1:27017/${dbconfig.DB}`,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    },
+    (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(`Connected to local MongoDB ${dbconfig.HOST}/${dbconfig.PORT}`);
+        }
+    }
+) 
+
 // Start server
 const port = 3000
 app.listen(port, () => {
