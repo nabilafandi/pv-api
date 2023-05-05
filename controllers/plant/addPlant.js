@@ -3,6 +3,7 @@ const { findByPlantName, findAllPlantsbyPlant_id } = require('../../services/pla
 
 const mongoose = require('mongoose');
 const { findUserbyId } = require('../../services/user.service');
+const { addPowerData } = require('../../services/powerData.service');
 const validation = (id) => {
     const idObject = mongoose.Types.ObjectId;
     if (idObject.isValid(id)) {
@@ -29,8 +30,10 @@ const addPlant = async (req, res) => {
         //cek duplikat nama plant
         const findDuplicate = await findByPlantName(data.nama)
         if (findDuplicate.length > 0) return res.status(400).json({ error: "Plant name is already taken" })
-
+        //tambah plant
         const newPlant = await services.plant.createNewPlant(data)
+        //tambah plant power data
+        await addPowerData(data.plant_id)
         res.status(200).json({ message: "Plant created succesfully", newPlant })
     } catch (error) {
         res.status(500).json({ error })

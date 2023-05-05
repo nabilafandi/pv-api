@@ -1,6 +1,7 @@
 const services = require('../../services/services')
 const mongoose = require('mongoose');
 const { deleteSensor } = require('../../services/sensor.service');
+const { deletePowerData } = require('../../services/powerData.service');
 const validation = (id) => {
   const idObject = mongoose.Types.ObjectId;
   if (idObject.isValid(id)) {
@@ -18,9 +19,10 @@ const deletePlant = async (req, res) => {
     //check if plant exist
     const plantExist = await services.plant.findPlantbyId(req.params.id)
     if (!plantExist) return res.status(404).json({ error: "Plant not Found" })
-    //delete plant related sensors
+    //delete plant related sensors and power data
     const relatedSensor = await deleteSensor(plantExist.plant_id)
-    console.log(relatedSensor)
+    const relatedPowerData = await deletePowerData(plantExist.plant_id)
+    
     //delete plant
     await services.plant.deletebyId(req.params.id)
     res.json({ message: "Plant deleted succesfully." })
